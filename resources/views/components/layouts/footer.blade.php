@@ -1,3 +1,6 @@
+</div>
+</div>
+</div> <!-- /Page Body Closing Tag -->
 <footer class="footer footer-transparent d-print-none">
     <div class="container-xl">
       <div class="row text-center align-items-center flex-row-reverse">
@@ -32,5 +35,5 @@
         </div>
       </div>
     </footer>
-  </div>
-</div>
+  </div><!-- /Page Wrapper Closing Tag -->
+</div> <!-- /Page container-fluid Closing Tag -->

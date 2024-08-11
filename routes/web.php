@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Counter;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NewTeamMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,4 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/counter', Counter::class);
-Route::get('/computer', Counter::class);
+Route::get('/team_member', [NewTeamMemberController::class, 'index']);
