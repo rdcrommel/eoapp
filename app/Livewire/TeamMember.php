@@ -4,31 +4,33 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithoutUrlPagination;
 use App\Models\Employee;
+use Illuminate\Support\Facades\DB;
 
 class TeamMember extends Component
 {
     use WithPagination;
+
     public $search = '';
     public $perPage = 10; // Default number of entries per page
     protected $queryString = ['search'];
-    
-    public function render() {
-        $employees = Employee::query()
-        ->leftJoin('employee_other_details', 'employee.employee_id', '=', 'employee_other_details.employee_id') // Adjust column names if necessary
-        ->select(
-            'employee.*', // Get all fields from the employee table
-            'employee_other_details.created_date', // Replace with actual fields from employee_other_details
-            'employee_other_details.remarks' // Replace with actual fields from employee_other_details
-        )
-        ->where(function ($query) {
-            if ($this->search) {
-                $query->where('employee.employee_lastname', 'like', '%' . $this->search . '%')
-                      ->orWhere('employee.employee_firstname', 'like', '%' . $this->search . '%');
-            }
-        })
-        ->paginate($this->perPage);
-        
-        return view('livewire.team-member', ['employees' => $employees]);
+    public $modalData;
+
+    public function loadData($id){
+        $this->modalData = Employee::find($id);
+        $this->dispatch('openModal'); // Emit an event to open the modal
     }
+
+    function render() {
+        $employees = DB::table(DB::raw('employee AS emp'))
+            ->select('emp.employee_id','emp.employee_firstname', 'emp.employee_lastname', 'emp.employee_bio', 'dept.department_name', 'eod.created_date', 'eod.approval_status', 'eod.remarks', 'position.position_name', 'emp.employee_payrolltype', 'emp.employee_dailyrate', 'emp.employee_monthlyrate', 'eod.created_date')
+            ->join(DB::raw('employee_other_details AS eod'), 'eod.employee_id', '=', 'emp.employee_id')
+            ->leftJoin(DB::raw('tbl_department AS dept'), 'dept.department_id', '=', 'emp.department_id')
+            ->leftJoin(DB::raw('r2groupc_crm.position AS position'), 'position.position_id', '=', 'emp.position_id')
+            ->get();
+
+        return view('livewire.team_member.team-member', ['employees' => $employees]);
+    }
+  
 }
