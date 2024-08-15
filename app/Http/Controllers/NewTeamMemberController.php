@@ -16,8 +16,10 @@ class NewTeamMemberController extends Controller
         $result = Employee::getEmployeeDetails([
             "employee_id" => $request->input('employee_id'),
         ]);
+
+        $view_data["view_data"] = $result;
         
-        $viewContent = view('team_member.modal_form', $result)->render();
+        $viewContent = view('team_member.modal_form', $view_data)->render();
         return response()->json(['data' => $viewContent]);
     }
 }

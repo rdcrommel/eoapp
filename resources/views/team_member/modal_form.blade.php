@@ -8,35 +8,35 @@
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Name</label>
-          <input type="text" class="form-control" name="example-text-input" placeholder="Your report name" disabled>
+          <input type="text" class="form-control" name="example-text-input" value="{{ $view_data->employee_lastname. ' '.$view_data->employee_firstname }}" placeholder="Your report name" disabled>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label class="form-label">Department/Branch</label>
+              <input type="text" class="form-control" disabled>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label class="form-label">Position</label>
+              <input type="text" class="form-control" disabled>
+            </div>
+          </div>
         </div>
 
         <div class="row">
           <div class="col-lg-6">
             <div class="mb-3">
               <label class="form-label">Payroll Type</label>
-              <input type="text" class="form-control" disabled>
+              <input type="text" class="form-control" value="{{ $view_data->employee_payrolltype }}" disabled>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
               <label class="form-label">Daily Rate/Monthly Rate</label>
-              <input type="text" class="form-control" disabled>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <label class="form-label">Payroll Type</label>
-              <input type="text" class="form-control" disabled>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <label class="form-label">Daily Rate/Monthly Rate</label>
-              <input type="text" class="form-control" disabled>
+              <input type="text" class="form-control" value="{{ $view_data->employee_dailyrate ? $view_data->employee_dailyrate : $view_data->employee_monthlyrate }}" disabled>
             </div>
           </div>
         </div>

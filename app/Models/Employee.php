@@ -12,15 +12,10 @@ class Employee extends Model
     protected $table = 'employee'; // Ensure the table name is correct
     protected $primaryKey = 'employee_id'; // Specify the primary key if it's not 'id'
 
-    function getEmployeeOtherDetails(): HasOne {
-        return $this->hasOne(EmployeeOtherDetail::class, 'employee_id', 'employee_id');
-    }
-
     public static function getEmployeeDetails($options = array()) {
         $employee_id = array_key_exists("employee_id", $options) ? $options["employee_id"] : null;
 
         if ($employee_id) {
-            // Use self:: for static context
             return self::where('employee_id', $employee_id)->first();
         }
 
