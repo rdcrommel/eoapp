@@ -15,13 +15,13 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label class="form-label">Department/Branch</label>
-              <input type="text" class="form-control" disabled>
+              <input type="text" class="form-control" value="{{ $view_data->branch_name ?? $view_data->department  }}" disabled>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
               <label class="form-label">Position</label>
-              <input type="text" class="form-control" disabled>
+              <input type="text" class="form-control" value="{{ $view_data->position }}" disabled>
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label class="form-label">Daily Rate/Monthly Rate</label>
-              <input type="text" class="form-control" value="{{ $view_data->employee_dailyrate ? $view_data->employee_dailyrate : $view_data->employee_monthlyrate }}" disabled>
+              <input type="text" class="form-control" value="{{ $view_data->employee_dailyrate ?? $view_data->employee_monthlyrate }}" disabled>
             </div>
           </div>
         </div>

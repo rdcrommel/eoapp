@@ -22,4 +22,40 @@ class NewTeamMemberController extends Controller
         $viewContent = view('team_member.modal_form', $view_data)->render();
         return response()->json(['data' => $viewContent]);
     }
+
+    function getEmployeeStatus(Request $request) {
+        $result = Employee::getEmployeeStatus([
+            "status" => $request->input('status'),
+        ]);
+
+        return response()->json(['data' => $result]);
+    }
+
+    function getAllTeamMember() {
+        $employeeModel = new Employee;
+        $results = $employeeModel->getAllTeamMember();
+
+        $data = array();
+
+        foreach($results as $result) {
+            $data[] = $this->_make_row($result);
+        }
+        
+        return response()->json(['data' => $data]);
+    }
+
+    private function _make_row($data) {
+        return array(
+            $data->employee_id,
+            $data->created_date,
+            $data->employee_firstname.' '. $data->employee_lastname,
+            $data->employee_bio,
+            $data->department_name ? $data->department_name : $data->branch_name,
+            $data->position_name,
+            $data->employee_payrolltype,
+            $data->employee_monthlyrate ? $data->employee_monthlyrate : $data->employee_dailyrate,
+            $data->approval_status,
+            $data->remarks
+        );
+    }
 }

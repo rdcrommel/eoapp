@@ -23,4 +23,6 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/team_member', [NewTeamMemberController::class, 'index']);
 Route::get('/showModalForm', [NewTeamMemberController::class, 'showModalForm']);
+Route::get('/getEmployeeStatus', [NewTeamMemberController::class, 'getEmployeeStatus']);
+Route::get('/getAllTeamMember', [NewTeamMemberController::class, 'getAllTeamMember']);
 
